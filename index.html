@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Paiement fictif — Démo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; background:#f4f6f9; color:#222; padding:24px; }
+    .card { max-width:420px; margin:40px auto; background:#fff; border-radius:8px; box-shadow:0 6px 20px rgba(0,0,0,0.08); padding:20px; }
+    h1 { margin:0 0 12px; font-size:20px; }
+    label { display:block; margin:10px 0 6px; font-size:13px; color:#444; }
+    input { width:100%; padding:10px; border:1px solid #ddd; border-radius:6px; box-sizing:border-box; }
+    .row { display:flex; gap:10px; }
+    .small { flex:1; }
+    button { margin-top:14px; width:100%; padding:10px; background:#2b8cff; color:white; border:none; border-radius:6px; font-size:15px; cursor:pointer; }
+    p.note { font-size:13px; color:#666; margin-top:12px; }
+    .success { color: #0a8a3b; margin-top:12px; font-weight:600; }
+    .fake { font-size:12px; color:#b33; margin-top:8px; }
+  </style>
+</head>
+<body>
+  <div class="card" role="main" aria-labelledby="title">
+    <h1 id="title">Paiement fictif — Démo</h1>
+    <p class="note">Montant : <strong>12,34 €</strong> — Cette page est fictive, aucune transaction réelle.</p>
+
+    <form id="fakePaymentForm" onsubmit="event.preventDefault(); simulatePayment();">
+      <label>Nom sur la carte
+        <input type="text" name="name" required placeholder="Jean DUPONT">
+      </label>
+
+      <label>Numéro de carte
+        <input type="text" name="number" required placeholder="4242 4242 4242 4242" inputmode="numeric" maxlength="19">
+      </label>
+
+      <div class="row">
+        <label class="small">Expiration
+          <input type="text" name="exp" required placeholder="MM/AA" maxlength="5">
+        </label>
+        <label class="small">CVV
+          <input type="text" name="cvv" required placeholder="123" maxlength="4" inputmode="numeric">
+        </label>
+      </div>
+
+      <button type="submit">Payer</button>
+      <p id="result" class="success" aria-live="polite" style="display:none"></p>
+      <p class="fake">Page de test : n'envoyez pas de vraies données sensibles ici.</p>
+    </form>
+  </div>
+
+  <script>
+    function simulatePayment() {
+      // NE PAS ENVOYER — simulation locale seulement
+      const msg = document.getElementById('result');
+      msg.style.display = 'block';
+      msg.textContent = 'Paiement simulé : réussite (aucune transaction réelle).';
+      // on peut effacer les champs pour l'effet demo
+      setTimeout(()=> document.getElementById('fakePaymentForm').reset(), 800);
+    }
+  </script>
+</body>
+</html>
